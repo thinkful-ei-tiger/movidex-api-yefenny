@@ -39,10 +39,17 @@ function handleGetMovie(req, res) {
     );
   }
   if (country) {
-    results = results.filter((results) =>
+    results = results.filter((result) =>
       result.country.toLowerCase().includes(country.toLowerCase())
     );
   }
+  if (avg_vote) {
+    results = results.filter(
+      (result) => result['avg_vote'] >= Number(avg_vote)
+    );
+  }
+
+  res.json(results);
 }
 app.get('/movie', handleGetMovie);
 
